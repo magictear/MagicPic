@@ -1,0 +1,74 @@
+﻿extends layout
+
+block content   
+  main#main.site-main.main
+    section.section
+      .container
+        .row         
+          #container
+            #content(role='main')
+              nav.breadcrumb
+                li
+                  a(href='/') Home
+                i.fa.fa-angle-right
+                  span.fs-13.text-gray-soft Post Name:
+                  h2.page-title.mb-2.mb-md-0 #{post.postname}  
+              .archive-title.clearfix
+                .row.align-items-end
+                  .col-md-12
+                    h2.page-title.mb-2.mb-md-0 Post Name: #{post.postname}
+                  - if (user){
+                    -if(user.username==post.username){
+                      .col-md-6
+                        h2.page-title.mb-2.mb-md-0 You can     
+                          a(href='/post/'+post._id+"/newpic") Add more pic 
+                      .col-md-3  
+                        h2.page-title.mb-2.mb-md-0 or 
+                          a(href='/post/'+post._id+"/edit") edit this post 
+                      .col-md-3      
+                        form( action='/post/'+post._id+'?_method=delete', method='post')   
+                          button(class='btn btn-danger') Delete
+                    -}
+                  -}                    
+              ul.row  
+                - var pd='/post/'+post._id+'/product/'              
+                - post.pics.forEach(function(pic){                
+                li.col-6
+                  .theme-card
+                    .theme-card__body
+                      .feature__thum
+                        a.d-block
+                          img.theme-card__img.wp-post-image( src=pic.image, alt='') 
+                      .feature__des
+                        .feature__content 
+                          a(href=pd+pic._id) Shop Now 
+                          h4 #{pic.picname}  
+                        button.theme-card__body__overlay.btn.btn-brand.btn-sm(class='btnmod',data-toggle='modal', data-target='#myModal') Live preview 
+                    .theme-card__footer
+                      .theme-card__footer__item
+                        a.theme-card__title.mr-1(href=pd+pic._id) #{pic.picname}
+                        p.theme-card__info
+                        ul.prod_cats_list
+                          li
+                            p by
+                              |
+                              a(href='/user/'+post.username)  #{post.username}
+                          li
+                            p |
+                              |
+                              a(href='/category/'+post.classification)  #{post.classification}
+                          li
+                            p | #{pic.date}  
+                        p
+                      .theme-card__footer__item
+                        p.theme-card__price
+                          span.woocommerce-Price-amount.amount
+                            span.woocommerce-Price-currencySymbol ￥
+                            | #{pic.price}
+                        ul.rating
+                          li.rating__item
+                          li.rating__item
+                          li.rating__item
+                          li.rating__item
+                          li.rating__item
+                - }) 

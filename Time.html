@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!-- saved from url=(0094)file:///D:/%E8%BF%85%E9%9B%B7%E4%B8%8B%E8%BD%BD/jiaoben6727/jiaoben6727%20-%202/img/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Time</title>
+
+<style>
+	  body {
+	  background-size:cover;
+	  background-repeat:no-repeat;
+	  background-position:center top;
+	}
+
+	#container {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		background-image: url(Screenshot.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+	}
+
+	#time_body {
+		margin: auto;
+		position: absolute;
+		top: 3%;
+		bottom: 83%;
+		right: 0;
+		left: 0;
+		height: 10%;
+		width: 100%;
+	}
+	#code {
+		margin: auto;
+		position: absolute;
+		top: 15%;
+		bottom: 54%;
+		right: 0;
+		left: 0;
+		height: 40%;
+		width: 100%;
+		background-image: url(动画4.gif);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+	}
+	.time {
+		font-size: 30px;
+	}
+
+	li {
+		float: left;
+		width: 100%;
+		list-style: none;
+	}
+</style>
+</head>
+
+<body onload="startTime()">
+
+<div id="container">
+	<div id="time_body">
+		<div id="beijing" class="time"></div>
+	</div>
+	<div id="code">
+	</div>
+</div>
+
+<script type="text/javascript">
+function startTime() {
+	document.getElementById('beijing').innerHTML = calcTime(+8)
+	t = setTimeout('startTime()', 1000)
+}
+
+function checkTime(i) {
+	if (i < 10) { i = "0" + i }
+	return i
+}
+
+function calcTime(offset) {
+	var d = new Date();
+	var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+	var nd = new Date(utc + (3600000 * offset));
+	var y=nd.getFullYear()
+	var mo = nd.getMonth()+1
+	var d= nd.getDate()
+	var h = nd.getHours()
+	var m = nd.getMinutes()
+	var s = nd.getSeconds()
+	h = checkTime(h)
+	m = checkTime(m)
+	s = checkTime(s)
+	return mo+"月"+d+"日"+"         "+h + ":" + m + ":" + s
+}
+
+
+</script>
+
+</body></html>
